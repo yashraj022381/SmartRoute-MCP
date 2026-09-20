@@ -1,9 +1,156 @@
-# SmartRoute-MCP
+# 🧭 SmartRoute-MCP
 A cost-optimized, MCP-enabled multi-agent AI system with live routing visibility.
 
-<p align="center"> <img alt="Python" src="https://img.shields.io/badge/python-3.11-blue?style=for-the-badge&logo=python&logoColor=white"> <img alt="FastAPI" src="https://img.shields.io/badge/API-FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white"> <img alt="LangGraph" src="https://img.shields.io/badge/agents-LangGraph-1C3C3C?style=for-the-badge"> <img alt="Docker" src="https://img.shields.io/badge/deployment-Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"> <img alt="License" src="https://img.shields.io/github/license/yashraj022381/SmartRoute-MCP?style=for-the-badge"> </p> <p align="center"> <img alt="Last commit" src="https://img.shields.io/github/last-commit/yashraj022381/SmartRoute-MCP?style=flat-square"> <img alt="Repo size" src="https://img.shields.io/github/repo-size/yashraj022381/SmartRoute-MCP?style=flat-square"> <img alt="Stars" src="https://img.shields.io/github/stars/yashraj022381/SmartRoute-MCP?style=flat-square"> </p> <p align="center"> <a href="#-getting-started"> <img alt="Run it locally" src="https://img.shields.io/badge/⚡_Run_it_locally-Docker_Compose-2496ED?style=for-the-badge"> </a> <!-- Not deployed publicly yet. Once you deploy (Render, Hugging Face Spaces, etc.), replace the badge below with: <a href="https://your-live-url-here"> <img alt="Live Demo" src="https://img.shields.io/badge/🚀_Live_Demo-View_App-success?style=for-the-badge"> </a> --> <img alt="Live Demo" src="https://img.shields.io/badge/🚀_Live_Demo-Not_yet_deployed-lightgrey?style=for-the-badge"> </p>
+<p align="center"> <img alt="Python" src="https://img.shields.io/badge/python-3.11-blue?style=for-the-badge&logo=python&logoColor=white"> <img alt="FastAPI" src="https://img.shields.io/badge/API-FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white"> <img alt="LangGraph" src="https://img.shields.io/badge/agents-LangGraph-1C3C3C?style=for-the-badge"> <img alt="Docker" src="https://img.shields.io/badge/deployment-Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"> <img alt="License" src="https://img.shields.io/github/license/yashraj022381/SmartRoute-MCP?style=for-the-badge"> </p> <p align="center"> <img alt="Last commit" src="https://img.shields.io/github/last-commit/yashraj022381/SmartRoute-MCP?style=flat-square"> <img alt="Repo size" src="https://img.shields.io/github/repo-size/yashraj022381/SmartRoute-MCP?style=flat-square"> <img alt="Stars" src="https://img.shields.io/github/stars/yashraj022381/SmartRoute-MCP?style=flat-square"> </p> <p align="center"> <a href="#-getting-started"> <img alt="Run it locally" src="https://img.shields.io/badge/⚡_Run_it_locally-Docker_Compose-2496ED?style=for-the-badge"> </a> 
+<img alt="Live Demo" src="https://img.shields.io/badge/🚀_Live_Demo-Not_yet_deployed-lightgrey?style=for-the-badge"> </p>
 
 - SmartRoute-MCP analyzes every incoming query, routes it to the cheapest model capable of handling it well, and orchestrates a Researcher → Writer → Reviewer agent team —       with the Reviewer able to send work back to whichever agent actually needs to fix it, based on whether the problem is factual or stylistic.
 
 - Everything is wired together through the Model Context Protocol (MCP) for tool access, and fully observable through Prometheus and Grafana.
 
+
+📸 Screenshots
+
+
+✨ Features
+
+ - Complexity-based routing — a lightweight classifier scores every query and routes it to a cheap local model (Ollama /        Llama 3.2) or a stronger cloud model (Groq), based on the actual topic's complexity — not the length of whatever wrapper     prompt an agent happens to be using internally.
+  
+ - Combined cost + latency objective — routing also accounts for real observed latency per tier, not cost alone, so a slow      "cheap" tier doesn't quietly become the worse choice.
+  
+ - Self-correcting agent team — Researcher → Writer → Reviewer via LangGraph. The Reviewer classifies issues as factual         (routed back to the Researcher for fresh information) or stylistic (routed back to the Writer), each with its own            independent one-revision budget so one type of fix never blocks the other.
+   
+ - Format- and relevance-aware research — trivial topics (e.g. a direct calculation) skip web search and article-length         padding entirely; search results that don't actually relate to the topic are treated as a failed search rather than          trusted blindly.
+  
+ - MCP tool server — exposes web search, sandboxed Python code execution, and semantic RAG search as standard MCP tools,        callable by any MCP client.
+   
+ - RAG research cache — Chroma vector store lets the Researcher reuse prior research for similar topics instead of re-          searching from scratch.
+   
+ - Adaptive threshold calibration — the classifier's weak/strong cutoff nudges itself over time based on real fallback rates.
+ 
+ - Full observability — every routing decision is logged to SQLite and exposed as Prometheus metrics, visualized in Grafana     with live-updating dashboards.
+   
+ - One-command Docker deployment — API, UI, Prometheus, and Grafana all start together with docker-compose up .
+
+ - Evaluation harness — compares routed cost/quality against an always-strong-model baseline across a batch of test queries
+
+
+🧰 Tech Stack
+
+   Layer	                           Technology
+ ______________________________________________________  
+   Agent orchestration	             LangGraph
+   API	                             FastAPI
+   UI	                               Streamlit
+   Local model	                     Ollama (Llama 3.2)
+   Cloud model	                     Groq (openai/gpt-oss-120b)
+   Tool protocol	                   MCP (Model Context Protocol)
+   Vector store	                     ChromaDB
+   Performance DB	                   SQLite
+   Metrics	                         Prometheus
+   Dashboards	                       Grafana
+   Containerization	                 Docker + Docker Compose
+
+📁 Project Structure
+
+  smartroute-mcp/
+  ├── agents/          # Researcher, Writer, Reviewer nodes + LangGraph wiring
+  ├── api/             # FastAPI app
+  ├── db/              # SQLite performance database
+  ├── eval/            # Evaluation harness (routed vs always-strong)
+  ├── mcp_server/      # MCP server (web search, code exec, RAG) + client
+  ├── metrics/         # Prometheus metrics instrumentation
+  ├── rag/             # Chroma vector store for research caching
+  ├── router/          # Classifier, calibration, model registry, cost/latency routing
+  ├── ui/              # Streamlit chat interface
+  ├── Dockerfile
+  ├── docker-compose.yml
+  ├── prometheus.yml
+  └── requirements.txt
+
+
+🚀 Getting Started
+
+ - Prerequisites
+   . Docker Desktop
+   . Ollama installed and running locally, with llama3.2:1b pulled:
+  
+    ollama pull llama3.2:1b
+   
+   . A Groq API key for the "strong" tier
+
+ - Configuration
+
+   . Create a .env file in the project root:
+
+    GROQ_API_KEY=your_key_here
+
+ - Running with Docker (recommended)
+  
+     bash
+     docker-compose up --build
+
+ - Then open:
+
+   Service	                 URL
+ ___________________________________________________  
+   UI (the app itself)	     http://localhost:8501
+   API docs	                 http://localhost:8000/docs
+   Prometheus	               http://localhost:9090
+   Grafana	                 http://localhost:3000 (login: admin / admin)
+
+
+ - See DOCKER.md for troubleshooting and full details.
+
+   Running locally without Docker
+   
+   bash
+   python -m venv .
+   Scripts\activate          # Windows
+   pip install -r requirements.txt
+
+   # In one terminal:
+   uvicorn api.main:app --reload --port 8000
+
+   # In another terminal:
+   streamlit run ui/app.py
+
+
+📊 Observability: Prometheus & Grafana
+
+ - Every routed query is instrumented and exposed at /metrics in Prometheus format. Once the stack is running:
+
+   (i) Open Grafana at localhost:3000 (admin / admin)
+  (ii) Add a Prometheus data source with URL http://prometheus:9090
+ (iii) Build panels from these metrics:
+      > smartroute_requests_total — request volume, by tier
+      > smartroute_cost_usd_total — running cost, by tier
+      > smartroute_request_latency_seconds — latency histogram, by tier
+      > smartroute_fallbacks_total — how often the weak tier's response was too short and genuinely needed a strong-tier             retry
+  (iv) Route a few queries through the UI and watch the panels update live
+
+ - Prometheus's own UI at localhost:9090 is also useful for ad-hoc exploration — check Status → Targets to confirm the API      is being scraped successfully before building dashboards.
+
+🧪 Evaluation
+
+  - Run the evaluation harness to compare routed cost/quality against always using the strong model:
+
+    bash
+    python eval/run_eval.py
+
+  - Results are saved to eval_results/latest_report.json.
+
+
+🗺️ Roadmap
+
+ - Originally planned future improvements:
+
+   > Combined cost/latency routing objective (not cost alone)
+   > Reviewer feedback routed back to the Researcher for factual issues, not only the Writer — with independent revision          budgets per issue type
+   > Expanded MCP tool server (code execution, real RAG document store)
+   > Real Prometheus + Grafana dashboard with historical graphs
+
+   
+📄 License
+
+MIT — see LICENSE for details.   
