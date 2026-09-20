@@ -1,0 +1,16 @@
+# prometheus.yml
+#
+# Tells Prometheus WHERE to look for metrics and HOW OFTEN. "Scraping"
+# just means "go fetch whatever's on the /metrics page right now."
+
+global:
+  scrape_interval: 15s   # how often Prometheus checks in
+
+scrape_configs:
+  - job_name: "smartroute-api"
+    static_configs:
+      # "api" here is the compose SERVICE NAME, same trick the ui
+      # service already uses to reach api - Docker's internal network
+      # resolves service names to the right container automatically.
+      - targets: ["api:8000"]
+    metrics_path: /metrics

@@ -1,0 +1,30 @@
+# Don't copy these into the Docker image - keeps it small and avoids
+# accidentally baking secrets or local junk into a shareable image.
+
+# Virtual environment - lives directly in the project root here
+# (created via `python -m venv .`), NOT in a `venv/` subfolder, so we
+# have to exclude its actual pieces by name.
+Include/
+Lib/
+Scripts/
+share/
+pyvenv.cfg
+
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+
+.env
+.git/
+.gitignore
+
+smartroute.db
+*.db
+
+README.md
+
+# Editor/OS junk, in case you ever open this on a machine that adds them
+.vscode/
+.idea/
+.DS_Store

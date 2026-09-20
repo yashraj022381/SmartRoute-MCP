@@ -1,0 +1,13 @@
+python-dotenv==1.0.1
+chromadb
+ollama==0.3.3
+groq
+langgraph
+mcp
+ddgs
+fastapi
+uvicorn[standard]
+streamlit
+requests
+prometheus_client
+mcp==1.28.1
