@@ -41,6 +41,35 @@ A cost-optimized, MCP-enabled multi-agent AI system with live routing visibility
 
  - Evaluation harness — compares routed cost/quality against an always-strong-model baseline across a batch of test queries
 
+🏗️ Architecture
+        User Query
+            │
+            ▼
+   ┌─────────────────┐
+   │  Complexity     │  ← Lightweight classifier
+   │  Classifier     │
+   └────────┬────────┘
+            │
+    ┌───────┴─────────┐
+    │                 │
+    Weak Tier  Strong Tier
+     (Ollama)    (Groq)
+    │                 │
+    └────────┬────────┘
+             ▼
+┌─────────────────────────────┐
+│   LangGraph Multi-Agent     │
+│  Researcher → Writer →      │
+│  Reviewer (self-correcting) │
+└────────────┬────────────────┘
+             │
+             ▼
+   Final Answer + Metrics
+             │
+     ┌───────┴───────┐
+     ▼               ▼
+Prometheus     Grafana Dashboards
+
 
 🧰 Tech Stack
 
@@ -82,9 +111,10 @@ A cost-optimized, MCP-enabled multi-agent AI system with live routing visibility
    . Docker Desktop
    . Ollama installed and running locally, with llama3.2:1b pulled:
   
-    ollama pull llama3.2:1b
+      ollama pull llama3.2:1b
    
    . A Groq API key for the "strong" tier
+     A free Groq API key
 
  - Configuration
 
@@ -133,10 +163,10 @@ A cost-optimized, MCP-enabled multi-agent AI system with live routing visibility
       > smartroute_requests_total — request volume, by tier
       > smartroute_cost_usd_total — running cost, by tier
       > smartroute_request_latency_seconds — latency histogram, by tier
-      > smartroute_fallbacks_total — how often the weak tier's response was too short and genuinely needed a strong-tier             retry
+      > smartroute_fallbacks_total — how often the weak tier's response was too short and genuinely needed a strong-tier retry
   (iv) Route a few queries through the UI and watch the panels update live
 
- - Prometheus's own UI at localhost:9090 is also useful for ad-hoc exploration — check Status → Targets to confirm the API      is being scraped successfully before building dashboards.
+ - Prometheus's own UI at localhost:9090 is also useful for ad-hoc exploration — check Status → Targets to confirm the API is being scraped successfully before building dashboards.
 
 🧪 Evaluation
 
@@ -160,4 +190,11 @@ A cost-optimized, MCP-enabled multi-agent AI system with live routing visibility
    
 📄 License
 
-MIT — see LICENSE for details.   
+  MIT — see LICENSE for details.   
+
+🙏 Acknowledgements
+
+  - LangGraph for agent orchestration
+  - Model Context Protocol for standardized tool access
+  - Ollama & Groq for model inference
+  - Prometheus + Grafana for observability
