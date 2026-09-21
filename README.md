@@ -75,17 +75,18 @@ Prometheus     Grafana Dashboards
 
    Layer	                           Technology
  ______________________________________________________  
-   Agent orchestration	             LangGraph
-   API	                             FastAPI
+   Agent orchestration	              LangGraph
+   API	                              FastAPI
    UI	                               Streamlit
-   Local model	                     Ollama (Llama 3.2)
-   Cloud model	                     Groq (openai/gpt-oss-120b)
-   Tool protocol	                   MCP (Model Context Protocol)
+   Local model	                      Ollama (Llama 3.2)
+   Cloud model	                      Groq (openai/gpt-oss-120b)
+   Tool protocol	                    MCP (Model Context Protocol)
    Vector store	                     ChromaDB
    Performance DB	                   SQLite
-   Metrics	                         Prometheus
+   Metrics	                          Prometheus
    Dashboards	                       Grafana
    Containerization	                 Docker + Docker Compose
+
 
 📁 Project Structure
 
@@ -103,6 +104,7 @@ Prometheus     Grafana Dashboards
   ├── docker-compose.yml
   ├── prometheus.yml
   └── requirements.txt
+
 
 
 🚀 Getting Started
