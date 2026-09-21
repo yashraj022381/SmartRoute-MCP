@@ -1,8 +1,15 @@
 # 🧭 SmartRoute-MCP
 A cost-optimized, MCP-enabled multi-agent AI system with live routing visibility.
 
-<p align="center"> <img alt="Python" src="https://img.shields.io/badge/python-3.11-blue?style=for-the-badge&logo=python&logoColor=white"> <img alt="FastAPI" src="https://img.shields.io/badge/API-FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white"> <img alt="LangGraph" src="https://img.shields.io/badge/agents-LangGraph-1C3C3C?style=for-the-badge"> <img alt="Docker" src="https://img.shields.io/badge/deployment-Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"> <img alt="License" src="https://img.shields.io/github/license/yashraj022381/SmartRoute-MCP?style=for-the-badge"> </p> <p align="center"> <img alt="Last commit" src="https://img.shields.io/github/last-commit/yashraj022381/SmartRoute-MCP?style=flat-square"> <img alt="Repo size" src="https://img.shields.io/github/repo-size/yashraj022381/SmartRoute-MCP?style=flat-square"> <img alt="Stars" src="https://img.shields.io/github/stars/yashraj022381/SmartRoute-MCP?style=flat-square"> </p> <p align="center"> <a href="#-getting-started"> <img alt="Run it locally" src="https://img.shields.io/badge/⚡_Run_it_locally-Docker_Compose-2496ED?style=for-the-badge"> </a> 
-<img alt="Live Demo" src="https://img.shields.io/badge/🚀_Live_Demo-Not_yet_deployed-lightgrey?style=for-the-badge"> </p>
+[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-green.svg)](https://fastapi.tiangolo.com/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.40+-FF4B4B.svg)](https://streamlit.io/)
+[![LangGraph](https://img.shields.io/badge/LangGraph-Agent%20Orchestration-purple.svg)](https://langchain-ai.github.io/langgraph/)
+[![MCP](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-orange.svg)](https://modelcontextprotocol.io/)
+[![Docker](https://img.shields.io/badge/Docker-Compose-2496ED.svg)](https://www.docker.com/)
+[![Prometheus](https://img.shields.io/badge/Prometheus-Metrics-E6522C.svg)](https://prometheus.io/)
+[![Grafana](https://img.shields.io/badge/Grafana-Dashboards-F46800.svg)](https://grafana.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 - SmartRoute-MCP analyzes every incoming query, routes it to the cheapest model capable of handling it well, and orchestrates a Researcher → Writer → Reviewer agent team —       with the Reviewer able to send work back to whichever agent actually needs to fix it, based on whether the problem is factual or stylistic.
 
