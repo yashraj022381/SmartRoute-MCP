@@ -19,9 +19,9 @@ A cost-optimized, MCP-enabled multi-agent AI system with live routing visibility
 📸 Screenshots
 
   
-   | Streamlit Chat UI |
+   | 1 - Streamlit Chat UI / Main Dashboard |
    |-------------------|
-   | ![Main User Interface / Streamlit Chat UI](docs/images/ui-chat1.png)  |
+   | ![Streamlit Chat UI](docs/images/ui-chat1.png)  |
    | ![UI in Action - A1](docs/images/ui-chat2.png)  | 
    | ![UI in Action - B1](docs/images/ui-chat3a.png) |
    | ![UI in Action - B2](docs/images/ui-chat3b.png) |
@@ -30,12 +30,12 @@ A cost-optimized, MCP-enabled multi-agent AI system with live routing visibility
    | ![UI in Action - B5](docs/images/ui-chat3e.png) |
    
 
-  | Grafana Live Dashboard |
+  | 2 - Grafana Live Dashboard |
   |------------------------|
   | ![Grafana](docs/images/grafana-dashboard.png) |
 
 
-  | Prometheus Targets |
+  | 3 - Prometheus Targets |
   |--------------------|
   | ![Prometheus - 1](docs/images/prometheus1.png) |
   | ![Prometheus - 2](docs/images/prometheus2.png) |
@@ -45,7 +45,7 @@ A cost-optimized, MCP-enabled multi-agent AI system with live routing visibility
 
 
 
-  | Routing Decision Log |
+  | 4 - Routing Decision Log |
   |----------------------|
   | ![Stats](docs/images/routing-stats.png) |
 
