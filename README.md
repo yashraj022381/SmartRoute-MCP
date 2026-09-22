@@ -45,16 +45,18 @@ A cost-optimized, MCP-enabled multi-agent AI system with live routing visibility
 
   | 4 - API DOCS (Swagger) |
   |----------------------|
-  | ![Stats](docs/images/api-docs1.png) |
-  | ![Stats](docs/images/api-docs2.png) |
-  | ![Stats](docs/images/api-docs3.png) |
-  | ![Stats](docs/images/api-docs4.png) |
-  | ![Stats](docs/images/api-docs5.png) |
-  | ![Stats](docs/images/api-docs6.png) |
-  | ![Stats](docs/images/api-docs7.png) |
-  | ![Stats](docs/images/api-docs8.png) |
-  | ![Stats](docs/images/api-docs9.png) |
-  | ![Stats](docs/images/api-docs10.png) |
+  | ![Stats](docs/images/api-docs1.png)   |
+  | ![Stats](docs/images/api-docs2.png)   |
+  | ![Stats](docs/images/api-docs3a.png)  |
+  | ![Stats](docs/images/api-docs3b.png) |
+  | ![Stats](docs/images/api-docs4.png)   |
+  | ![Stats](docs/images/api-docs5a.png)  |
+  | ![Stats](docs/images/api-docs5b.png)  |
+  | ![Stats](docs/images/api-docs6.png)   |
+  | ![Stats](docs/images/api-docs7.png)   |
+  | ![Stats](docs/images/api-docs8.png)   |
+  | ![Stats](docs/images/api-docs9.png)   |
+  
   
   | 5 - Routing Decision Log |
   |----------------------|
