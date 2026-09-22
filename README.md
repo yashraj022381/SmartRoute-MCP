@@ -37,7 +37,12 @@ A cost-optimized, MCP-enabled multi-agent AI system with live routing visibility
 
   | Prometheus Targets |
   |--------------------|
-  | ![Prometheus](docs/images/prometheus.png) | 
+  | ![Prometheus - 1](docs/images/prometheus1.png) |
+  | ![Prometheus - 2](docs/images/prometheus2.png) |
+  | ![Prometheus - 3](docs/images/prometheus3.png) | 
+  | ![Prometheus - 4](docs/images/prometheus4.png) | 
+  | ![Prometheus - 5](docs/images/prometheus5.png) | 
+
 
 
   | Routing Decision Log |
