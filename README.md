@@ -21,8 +21,14 @@ A cost-optimized, MCP-enabled multi-agent AI system with live routing visibility
   
    | Streamlit Chat UI |
    |-------------------|
-   | ![UI](docs/images/ui-chat.png) | 
-
+   | ![Main User Interface / Streamlit Chat UI](docs/images/ui-chat1.png)  |
+   | ![UI in Action - A1](docs/images/ui-chat2.png)  | 
+   | ![UI in Action - B1](docs/images/ui-chat3a.png) |
+   | ![UI in Action - B2](docs/images/ui-chat3b.png) |
+   | ![UI in Action - B3](docs/images/ui-chat3c.png) |
+   | ![UI in Action - B4](docs/images/ui-chat3d.png) |
+   | ![UI in Action - B5](docs/images/ui-chat3e.png) |
+   
 
   | Grafana Live Dashboard |
   |------------------------|
