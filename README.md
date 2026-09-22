@@ -48,7 +48,7 @@ A cost-optimized, MCP-enabled multi-agent AI system with live routing visibility
   | ![Stats](docs/images/api-docs1.png)   |
   | ![Stats](docs/images/api-docs2.png)   |
   | ![Stats](docs/images/api-docs3a.png)  |
-  | ![Stats](docs/images/api-docs3b.png) |
+  | ![Stats](docs/images/api-docs3b.png)  |
   | ![Stats](docs/images/api-docs4.png)   |
   | ![Stats](docs/images/api-docs5a.png)  |
   | ![Stats](docs/images/api-docs5b.png)  |
@@ -60,7 +60,9 @@ A cost-optimized, MCP-enabled multi-agent AI system with live routing visibility
   
   | 5 - Routing Decision Log |
   |----------------------|
-  | ![Stats](docs/images/routing-stats.png) |
+  | ![Stats](docs/images/routing-stats1.png) |
+  | ![Stats](docs/images/routing-stats2.png) |
+
 
 ✨ Features
 
