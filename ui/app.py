@@ -17,10 +17,12 @@ if "last_result" not in st.session_state:
 with st.sidebar:
     st.header("📊 Performance Summary")
     try:
-        stats = requests.get(f"{API_URL}/stats", timeout=5).json()
-        if stats.get("total_queries", 0) == 0:
-            st.info("No data yet. Run something below!")
-
+        #stats = requests.get(f"{API_URL}/stats", timeout=5).json()
+        response = requests.get(f"{API_URL}/stats", timeout=5).json()
+        #if stats.get("total_queries", 0) == 0:
+        if response.status_code == 200:
+            stats = response.json()
+            #st.info("No data yet. Run something below!")        
         else:
             st.metric("Total queries routed", stats["total_queries"])
             st.metric("Total estimated cost", f"${stats['total_cost_usd']:.6f}")
@@ -30,6 +32,8 @@ with st.sidebar:
     except requests.exceptions.ConnectionError:
         st.error("Can't reach the API server at {API_URL}. Is it running? ")
                  #"(uvicorn api.main:app --reload --port 8000)")
+    except Exception:
+        stats = {"total_queries": 0, "total_cost": 0, "fallback_rate": 0}
 
 # --- Main area: run the agent team on a topic ---
 st.subheader("Write an article with the Researcher → Writer → Reviewer team")
