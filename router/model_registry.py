@@ -21,7 +21,7 @@ if USE_LOCAL_WEAK_MODEL:
     }
 else:
     WEAK_MODEL = {
-        "name": "llama-3.1-8b-instant",
+        "name": "openai/gpt-oss-20b",
         "provider": "groq",
         "description": (
             "Small, very fast cloud model - stands in for the local Ollama "
