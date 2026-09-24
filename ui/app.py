@@ -55,6 +55,7 @@ if run_button and topic.strip():
             )
             resp.raise_for_status()
             data = resp.json()
+            st.rerun()
         except requests.exceptions.ConnectionError:
             st.error(f"Can't reach the API server at {API_URL}. Is it running?")
             st.stop()
