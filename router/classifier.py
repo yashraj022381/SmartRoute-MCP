@@ -1,12 +1,15 @@
 from router.calibration import get_current_threshold
 
 COMPLEX_KEYWORDS = [
-    "analyze", "analyse", "compare", "camparison", "explain in detail",
-    "write code", "write a function", "debug", "architecture", "design a",
-    "strategy", "pros and cons", "step by step", "step-by-step",
+    "analyze", "analyse", "compare", "comparison", "explain in detail",
+    "detailed", "write code", "write a function", "debug", "architecture",
+    "design a", "strategy", "pros and cons", "step by step", "step-by-step",
     "summarize the following", "essay", "research", "evaluate",
-    "optimze", "alogrithm", "prove", "derive", "why deos", "trade-off",
-    "tradeoff", "multi-step", "reasoning",
+    "optimize", "algorithm", "prove", "derive", "why does", "trade-off",
+    "tradeoff", "multi-step", "reasoning", "applications", "challenges",
+    "future", "impact", "advantages", "disadvantages", "differences",
+    "similarities", "comprehensive", "in-depth", "thorough", "critical",
+    "discuss", "examine", "investigate", "explore", "assess"
 ]
 
 SIMPLE_KEYWORDS = [
@@ -19,51 +22,47 @@ def classify_complexity(query: str) -> dict:
     text = query.lower().strip()
     reasons = []
     score = 0.0
-    
-    # --- Clue 1: How long is the question? ---
+
+    # --- Clue 1: Length ---
     word_count = len(text.split())
     if word_count > 40:
-        score += 0.35
+        score += 0.40
         reasons.append(f"Long question ({word_count} words)")
-    elif word_count > 15:
-        score += 0.15
+    elif word_count > 18:
+        score += 0.25
         reasons.append(f"Medium-length question ({word_count} words)")
     else:
-        reasons.append(f"Short question ({word_count} words")
-        
+        reasons.append(f"Short question ({word_count} words)")
 
-     # --- Clue 2: Does it contain "complex" keywords? ---
+    # --- Clue 2: Complex keywords ---
     found_complex = [kw for kw in COMPLEX_KEYWORDS if kw in text]
     if found_complex:
-        bonus = min(0.15 * len(found_complex), 0.5)
+        bonus = min(0.18 * len(found_complex), 0.55)
         score += bonus
-        reasons.append(f"Contains complex=task keywords: {found_complex}")
-        
+        reasons.append(f"Contains complex keywords: {found_complex}")
 
-    # --- Clue 3: Does it contain "simple" keywords? ---
+    # --- Clue 3: Simple keywords ---
     found_simple = [kw for kw in SIMPLE_KEYWORDS if kw in text]
     if found_simple and not found_complex:
-        score -= 0.25
-        reasons.append(f"Contains simple-lookup keywords: {found_simple}")
-        
-        
-    # --- Clue 4: Is it asking MULTIPLE things at once? ---
+        score -= 0.30
+        reasons.append(f"Contains simple keywords: {found_simple}")
+
+    # --- Clue 4: Multiple questions ---
     question_marks = text.count("?")
     if question_marks > 1:
-        score += 0.2
-        reasons.append(f"Multiple questions in one message ({question_marks} '?' marks)")
+        score += 0.20
+        reasons.append(f"Multiple questions ({question_marks} '?' marks)")
 
-
-    # --- Clue 5: Does it mention code? (code questions usually need a smarter model) ---
+    # --- Clue 5: Code signals ---
     code_signals = ["```", "def ", "function", "class ", "import ", "code:"]
     if any(sig in text for sig in code_signals):
-        score += 0.2
+        score += 0.25
         reasons.append("Looks like it involves code")
-        
-    # Clamp the score between 0.0 and 1.0 (can't go below or above)
+
+    # Clamp score
     score = round(max(0.0, min(1.0, score)), 2)
 
-    threshold = get_current_threshold()    #0.4
+    threshold = get_current_threshold()  # usually 0.4
     tier = "strong" if score >= threshold else "weak"
 
     return {
