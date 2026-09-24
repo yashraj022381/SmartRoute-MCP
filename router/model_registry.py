@@ -24,13 +24,15 @@ else:
         "name": "openai/gpt-oss-20b",
         "provider": "groq",
         "description": (
-            "Small, very fast cloud model - stands in for the local Ollama "
+            "Small, fast cloud model - stands in for the local Ollama "
             "tier on hosting platforms that can't run a persistent local "
-            "model server. Cheapest model on Groq, and usually free in "
-            "practice within Groq's own free-tier request limits."
+            "model server. One of the cheapest models on Groq. (Note: "
+            "originally used llama-3.1-8b-instant here, but Groq removed "
+            "that model from general availability - swap this if Groq "
+            "changes their lineup again.)"
         ),
-        "input_cost_per_million": 0.05,
-        "output_cost_per_million": 0.08,
+        "input_cost_per_million": 0.075,
+        "output_cost_per_million": 0.30,
     }
 
 MODELS = {
