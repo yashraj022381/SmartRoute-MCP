@@ -1,4 +1,4 @@
-# 🧭 SmartRoute-MCP
+# 🧭 SmartRoute-MCP (Model Context Protocol)
 A cost-optimized, MCP-enabled multi-agent AI system with live routing visibility.
 
 [![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
