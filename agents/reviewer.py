@@ -89,7 +89,7 @@ def reviewer_node(state: dict) -> dict:
 
     #factual_hit = needs_revision and issue_type == "FACTUAL"
     #stylistic_hit = needs_revision and issue_type == "STYLISTIC"
-    redo_granted = next_route != "finalize"
+    #redo_granted = next_route != "finalize"
 
 
     return {
@@ -101,11 +101,11 @@ def reviewer_node(state: dict) -> dict:
         #"revision_count": state["revision_count"] + (1 if verdict == "NEEDS_REVISION" else 0),
         #"revision_count": state["revision_count"] + (1 if redo_target else 0),
         #"factual_revision_count": state.get("factual_revision_count", 0) + (1 if factual_hit else 0),
-        #"revision_count": state.get("revision_count", 0) + (1 if needs_revision else 0),
+        "revision_count": state.get("revision_count", 0) + (1 if needs_revision else 0),
         #"factual_revision_count": existing_factual + (1 if factual_granted else 0),
         #"stylistic_revision_count": state.get("stylistic_revision_count", 0) + (1 if stylistic_hit else 0),
         #"stylistic_revision_count": existing_stylistic + (1 if stylistic_granted else 0),
-        "revision_count": state.get("revision_count", 0) + (1 if redo_granted else 0),
+        #"revision_count": state.get("revision_count", 0) + (1 if redo_granted else 0),
         "factual_revision_count": new_factual_count,
         "stylistic_revision_count": new_stylistic_count,
         "next_route": next_route,
