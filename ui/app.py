@@ -14,7 +14,7 @@ st.set_page_config(page_title="SmartRoute-MCP", page_icon="🧭", layout="wide")
 st.title("🧭 SmartRoute-MCP")
 st.caption("A cost-optimized, multi-agent AI system with live routing visibility.")
 
-ef render_stats(placeholder):
+def render_stats(placeholder):
     """
     Fetches and displays /stats into the given placeholder, REPLACING
     whatever was there before. Called once at page load, and again after
