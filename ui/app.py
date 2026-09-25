@@ -14,17 +14,21 @@ st.set_page_config(page_title="SmartRoute-MCP", page_icon="🧭", layout="wide")
 st.title("🧭 SmartRoute-MCP")
 st.caption("A cost-optimized, multi-agent AI system with live routing visibility.")
 
-def render_stats(container):
+ef render_stats(placeholder):
     """
-    Fetches and displays /stats into the given container. Called once at
-    page load, and again after an agent-team run finishes - Streamlit
-    only runs the script once per interaction, and this code sits above
-    the "Run Agent Team" button in script order, so without a second
-    call here the sidebar would always show stats from BEFORE whatever
-    run you just clicked, never including it.
+    Fetches and displays /stats into the given placeholder, REPLACING
+    whatever was there before. Called once at page load, and again after
+    an agent-team run finishes.
+ 
+    Uses placeholder.container() as a context manager - this is the
+    pattern that actually replaces prior content. An earlier version of
+    this used a plain st.container() with a stray .empty() call, which
+    doesn't clear anything - it just left a throwaway placeholder while
+    the real widgets kept appending into the same container each call,
+    causing the stats to show twice, stacked, instead of the second call
+    replacing the first.
     """
-    container.empty()
-    with container:
+    with placeholder.container():
         try:
             stats = requests.get(f"{API_URL}/stats", timeout=60).json()
             if stats.get("total_queries", 0) == 0:
@@ -48,7 +52,7 @@ def render_stats(container):
 # --- Sidebar: live stats from the database ---
 with st.sidebar:
     st.header("📊 Performance Summary")
-    stats_container = st.container()
+    stats_container = st.empty()
     render_stats(stats_container)
 
 # --- Main area: run the agent team on a topic ---
