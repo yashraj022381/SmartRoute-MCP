@@ -69,7 +69,7 @@ A cost-optimized, MCP-enabled multi-agent AI system with live routing visibility
 
   🚀 Live Demo
 
-  [![Try the App](https://img.shields.io/badge/Try%20Live%20Demo-Click%20Here-brightgreen?style=for-the-badge&logo=streamlit)](https://smartroute-mcp-1.onrender.com)
+  [![Try the App](https://img.shields.io/badge/Try%20Live%20Demo-Click%20Here-brightgreen?style=for-the-badge&logo=streamlit)](https://smartroute-mcp-ngarpwsqg8vldnsqxbnfrn.streamlit.app/)
 
 
   
